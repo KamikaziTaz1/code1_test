@@ -1,0 +1,98 @@
+color bgColor;
+PVector pos, pos2, vel, vel2, accel, accel2, accel3;
+//float theta = 0;
+float speed =10;
+float x = 10;
+float paddlePosY=500;
+float paddlePosX=500;
+float elSize1 = 30;
+float elSize2 = 100;
+
+
+void setup(){
+  background(random(0, 255), random(0, 255), random(0, 255));
+  size(1000, 1000);
+  
+  pos = new PVector(width/2, 25);
+  vel = new PVector(0, 0);
+  vel2 = new PVector(0, 0);
+  accel = new PVector(0, 0.1);
+  accel3 = new PVector(0, 0.1);
+  
+  smooth();
+}
+
+void draw(){
+  
+  pushMatrix();
+ // ellipse (pos.x, pos.y, 30, 100);
+  fill(255);
+  stroke(255);
+
+
+  if(pos.y <= height){
+      pos.add(vel);
+      vel.add(accel);
+      //background();
+  }
+  
+  if(pos.y >= 1000){
+    pos.y = 0;
+    vel.y = 0.1;
+    pos.x = random(0, 1000);
+    
+  if (paddlePosX == pos.x){
+    paddlePosX = 0;
+    print("restart");
+  }    
+  
+  //if (pos.y <= 1000){
+  //  background(random(0, 255), random(0, 255), random(0, 255));
+  //}
+}
+  popMatrix();
+  
+   pushMatrix();
+   noStroke();
+  ellipse (pos.x, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x +40, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x +80, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x + 120, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x + 160, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x + 200, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  ellipse (pos.x + 240, pos.y, elSize1, elSize2);
+  fill(random(0, 255), random(0, 255), random(0, 255));
+  fill(0);
+ // stroke(0);
+  //rect(paddlePosX, paddlePosY, 60, 30);
+  fill(0);
+
+   popMatrix();
+
+  if(pos.y <= height){
+      pos.add(vel);
+      vel.add(accel);
+      elSize1 = random(0, 30);
+      fill(random(0, 255), random(0, 255), random(0, 255), random(0, 255));
+      //background(random(0, 255), random(0, 255), random(0, 255));
+  }
+  if(pos.x <=width){
+    pos.add(vel);
+    vel.add(accel);
+  }
+  if(pos.x <= 500){
+    elSize1 = random(1, 20);
+  }else{
+    elSize1 = random(20, 50);
+  }
+}
+//set up arraylist for ellipses for interactivity
+//put individual ellipses into a class
+//to change color of one of the individual circles, detect distance btwn/ mousePosition & x/y positions of individual circles
+//code based on that
